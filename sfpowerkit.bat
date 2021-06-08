@@ -1,1 +1,1 @@
-echo n | sfdx plugins:install sfpowerkit 
+echo y | sfdx plugins:install sfpowerkit 
