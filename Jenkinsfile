@@ -62,7 +62,31 @@ node {
 		   bat 'sfdx sfpowerkit:project:diff --revisionfrom 82b6e2f6b58a0c036872eb27197de8fc8214896f --revisionto eef00a353c0fc53fbfb684d16007458039429b96 --output config'
 		   //bat 'sfdx sfpowerkit:project:diff --revisionfrom 5baec5ec4bb213ff615946d21ca108cd3c8ea965 --revisionto 8649a5eca981ece8e869bb73c7d84eecce7a79c6 --output config'
 	    }
+		
+		
+		stage('Deploy and Run Tests') {
+		    rc = command "${toolbelt}/sfdx force:source:deploy -p config/force-app --wait 10 --targetusername SFDX --testlevel ${TEST_LEVEL}"
+		    //rc = command "${toolbelt}/sfdx force:source:deploy --deploydir ${DEPLOYDIR} --wait 10 --targetusername SFDX --testlevel ${TEST_LEVEL}"
+		    //rc = command "${toolbelt}/sfdx force:source:deploy -l RunLocalTests -c -d ./config --targetusername SFDX -w 10
+			
+		    if (rc != 0) {
+			error 'Salesforce deploy and test run failed.'
+		    }
+		}
 
+
+		// -------------------------------------------------------------------------
+		// Example shows how to run a check-only deploy.
+		// -------------------------------------------------------------------------
+
+		stage('Check Only Deploy') {
+		    //rc = command "${toolbelt}/sfdx force:source:deploy --deploydir ${DEPLOYDIR} --checkonly --wait 10 --targetusername SFDX --testlevel ${TEST_LEVEL}"
+		      rc = command "${toolbelt}/sfdx force:source:deploy -p config/force-app --checkonly --wait 10 --targetusername SFDX --testlevel ${TEST_LEVEL}"
+		    if (rc != 0) {
+		        error 'Salesforce deploy failed.'
+		   }
+		}
+		
 			    
 	    }
 	}
