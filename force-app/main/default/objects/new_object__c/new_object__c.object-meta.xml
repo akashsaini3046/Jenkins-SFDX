@@ -155,10 +155,10 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>new_object_test</label>
     <nameField>
-        <label>new_object_Name</label>
+        <label>new_object_Name--------------------------------------------------</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>new_objects</pluralLabel>
+    <pluralLabel>new_objects---------------------------------------</pluralLabel>
     <searchLayouts></searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
