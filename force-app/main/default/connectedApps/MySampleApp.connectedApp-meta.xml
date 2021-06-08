@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>akash.saini3046@gmail.com</contactEmail>
+    <label>MySampleApp</label>
+    <oauthConfig>
+        <callbackUrl>http://localhost:1717/OauthRedirect</callbackUrl>
+        <certificate>MIIDkjCCAnoCCQCyvRPSPbhl6DANBgkqhkiG9w0BAQsFADCBijELMAkGA1UEBhMCSU4xCzAJBgNVBAgTAkhSMQwwCgYDVQQHEwNHR04xEzARBgNVBAoTClNhbGVzZm9yY2UxDDAKBgNVBAsTA0RFVjETMBEGA1UEAxMKU2FsZXNmb3JjZTEoMCYGCSqGSIb3DQEJARYZYWthc2guc2FpbmkzMDQ2QGdtYWlsLmNvbTAeFw0yMTA2MDEwNzE2MDZaFw0yMjA2MDEwNzE2MDZaMIGKMQswCQYDVQQGEwJJTjELMAkGA1UECBMCSFIxDDAKBgNVBAcTA0dHTjETMBEGA1UEChMKU2FsZXNmb3JjZTEMMAoGA1UECxMDREVWMRMwEQYDVQQDEwpTYWxlc2ZvcmNlMSgwJgYJKoZIhvcNAQkBFhlha2FzaC5zYWluaTMwNDZAZ21haWwuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApGwF02EK5di+OZtyAidWA3q4aBeA/exLDwYc+Vcz/dk7vLliedgrk3opieRvv4t3hNH7u2Fs5NEkK5dTbIOwfdCQCORbXw1rqlajQWUnMgIHyWWGI0naxGeYCVtNRW4BZMMBhAJztV0kBmOv5jcRE48g7obU5X/uWhrqxRHklHK6DHimVvTMrvpy/xG+FDNwTG+Q8sesjpaRrJTvy1E2GKwWN4tJ/3AJNwqgz3BiJ6fPmGIXXr4qSN9zVnbBT9eQOKC8OKQdFCkSSFtexwr/Qznur7T8P1Qo8RPNlWZRev3+HoydJRRLHcW2GPdO3zaDRjjPEcZOuv/YXDeGMxP29wIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQCTGUSgI10G6I00zpyndbR5uO/wjTI5YgzXAX89qLBwgktd2SdAH+U/Z4xN8pTn1ijsSE0LNNdgAm9VjZbDW7HDmW15cuxSz4OQQvq6bAq8hJUBOY8YskGRasZbJFLp1z/ntgdd8aI5Y4D7MHy7Z1XC/19Tjjug5yb8lbqZJR6ps+4Gy4me7keTC1oH5cDk2T88erb+FRRD4DlslSJcaYzo9HLn6mfGb8AxS3KlogAJ/mA+PbrBtHRXFTTFNemH+MYOYSTNDJbzfAMGk1xTthRblNF36Y8ZoGn/XvQscHPOtCSZn/olPPP5s/0TlUzbm4Ta15S0UlEiAgpD4PcRfFMM</certificate>
+        <consumerKey>3MVG9fe4g9fhX0E5Zf3lGGyK5ccRgBnxU7.qfTXDHyGj0PePRtQunvEkJmVBtaWNaaBJBrsOiqVadZ3PDcYVF</consumerKey>
+        <isAdminApproved>true</isAdminApproved>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isSecretRequiredForRefreshToken>true</isSecretRequiredForRefreshToken>
+        <scopes>Basic</scopes>
+        <scopes>Api</scopes>
+        <scopes>Web</scopes>
+        <scopes>RefreshToken</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>ENFORCE</ipRelaxation>
+        <refreshTokenPolicy>infinite</refreshTokenPolicy>
+    </oauthPolicy>
+    <profileName>System Administrator</profileName>
+    <profileName>Force.com - Free User</profileName>
+</ConnectedApp>
