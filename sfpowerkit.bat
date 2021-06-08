@@ -1,2 +1,2 @@
 cd C:\Program Files\sfdx\bin
-sfdx plugins:install sfpowerkit
+sfdx plugins:install sfpowerkit -y
