@@ -54,7 +54,6 @@ node {
 		// Deploy metadata and execute unit tests.
 		// -------------------------------------------------------------------------
 		stage('Install sfpowerkit'){
-			bat 'cd C:\\Program Files\\sfdx\\bin'
 			bat 'sfpowerkit.bat'
 		}
 		
