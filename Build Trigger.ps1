@@ -1,5 +1,7 @@
-$user = 'admin'
-$pass = 'admin'
+$user = 'test'
+$pass = 'test'
+$prevcommit = '82b6e2f6b58a0c036872eb27197de8fc8214896f'
+$latestcommit = 'eef00a353c0fc53fbfb684d16007458039429b96'
 
 # The header is the username and password concatenated together
 $pair = "$($user):$($pass)"
@@ -23,4 +25,4 @@ $BuildHeaders = @{
     "Jenkins-Crumb" = $parsedJson.crumb
     Authorization = $basicAuthValue
 }
-Invoke-WebRequest -Uri "http://localhost:8080/job/abcd/buildWithParameters?PreviousCommitId=82b6e2f6b58a0c036872eb27197de8fc8214896f&LatestCommitId=eef00a353c0fc53fbfb684d16007458039429b96" -Headers $BuildHeaders -Method Post
+Invoke-WebRequest -Uri "http://localhost:8080/job/abcd/buildWithParameters?PreviousCommitId=$prevcommit&LatestCommitId=$latestcommit" -Headers $BuildHeaders -Method Post
