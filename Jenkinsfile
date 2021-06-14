@@ -48,48 +48,52 @@ node {
 		}
 
 
-//		stage('Install sfpowerkit'){
-//			bat 'sfpowerkit.bat'
-//		}
-
-
 		// -------------------------------------------------------------------------
 		// Deploy metadata and execute unit tests.
 		// -------------------------------------------------------------------------
 		
 		stage('Delta changes'){
-		   //bat 'sfdx sfpowerkit:project:diff --revisionfrom 82b6e2f6b58a0c036872eb27197de8fc8214896f --revisionto eef00a353c0fc53fbfb684d16007458039429b96 --output DeltaChanges'
 		   bat 'sfdx sfpowerkit:project:diff --revisionfrom %PreviousCommitId% --revisionto %LatestCommitId% --output DeltaChanges'
 	    }
 		
+
+     		// -------------------------------------------------------------------------
+	    		// Example shows how to run a check-only deploy.
+	   			// -------------------------------------------------------------------------
+
+		stage('Check Only Deploy') 
+		{
+			script
+			{
+				
+				if (TESTLEVEL=='NoTestRun') 
+				{
+					println TESTLEVEL
+					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX "
+				}
+				else if (TESTLEVEL=='RunLocalTests') 
+				{
+					println TESTLEVEL
+					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} --verbose --loglevel fatal"
+				}
+				else if (TESTLEVEL=='RunSpecifiedTests')
+				{
+					println TESTLEVEL
+					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} -r %SpecifyTestClass% --verbose --loglevel fatal"
+				}
+   
+				else (rc != 0) 
+				{
+					error 'Salesforce deploy failed.'
+				}
+    		}
+   		}
 		
-		stage('Deploy and Run Tests') {
-		    rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --wait 10 --targetusername SFDX"
-		    //rc = command "${toolbelt}/sfdx force:source:deploy --deploydir ${DEPLOYDIR} --wait 10 --targetusername SFDX --testlevel ${TEST_LEVEL}"
-		    //rc = command "${toolbelt}/sfdx force:source:deploy -l RunLocalTests -c -d ./config --targetusername SFDX -w 10
-			
-		    if (rc != 0) {
-			error 'Salesforce deploy and test run failed.'
-		    }
-		}
-
-
-		// -------------------------------------------------------------------------
-		// Example shows how to run a check-only deploy.
-		// -------------------------------------------------------------------------
-
-		stage('Check Only Deploy') {
-		    //rc = command "${toolbelt}/sfdx force:source:deploy --deploydir ${DEPLOYDIR} --checkonly --wait 10 --targetusername SFDX --testlevel ${TEST_LEVEL}"
-		      rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX"
-		    if (rc != 0) {
-		        error 'Salesforce deploy failed.'
-		   }
-		}
 		
 			    
-	    }
+	  
 	}
-}
+
 
 def command(script) {
     if (isUnix()) {
