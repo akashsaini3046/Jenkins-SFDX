@@ -61,10 +61,40 @@ node {
 	    		// Example shows how to run a check-only deploy.
 	   			// -------------------------------------------------------------------------
 
-		stage('Deploy and Run Tests') {
-		    rc = command "${toolbelt}/sfdx force:source:deploy -p force-app/main/default --wait 10 --targetusername SFDX"
-		}
-	}		    
+		stage('Check Only Deploy') 
+		{
+			script
+			{
+				
+				if (TESTLEVEL=='NoTestRun') 
+				{
+					println TESTLEVEL
+					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX "
+				}
+				else if (TESTLEVEL=='RunLocalTests') 
+				{
+					println TESTLEVEL
+					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} --verbose --loglevel fatal"
+				}
+				else if (TESTLEVEL=='RunSpecifiedTests')
+				{
+					println TESTLEVEL
+					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} -r %SpecifyTestClass% --verbose --loglevel fatal"
+				}
+   
+				else (rc != 0) 
+				{
+					error 'Salesforce deploy failed.'
+				}
+    		}
+   		}
+		
+
+
+
+
+
+		}		    
 	  
 	}
 }
