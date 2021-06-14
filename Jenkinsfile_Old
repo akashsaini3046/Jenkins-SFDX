@@ -5,7 +5,9 @@ node {
     def SF_CONSUMER_KEY=env.SF_CONSUMER_KEY
     def SF_USERNAME=env.SF_USERNAME
     def SERVER_KEY_CREDENTIALS_ID=env.SERVER_KEY_CREDENTIALS_ID
-    def TEST_LEVEL='%TestLevel%'
+    def DEPLOYDIR='.'
+    
+    def TEST_LEVEL='RunLocalTests'
     def SF_INSTANCE_URL = env.SF_INSTANCE_URL ?: "https://login.salesforce.com"
 
 
@@ -48,9 +50,9 @@ node {
 		}
 
 
-//		stage('Install sfpowerkit'){
-//			bat 'sfpowerkit.bat'
-//		}
+		stage('Install sfpowerkit'){
+			bat 'sfpowerkit.bat'
+		}
 
 
 		// -------------------------------------------------------------------------
@@ -58,7 +60,7 @@ node {
 		// -------------------------------------------------------------------------
 		
 		stage('Delta changes'){
-		   //bat 'sfdx sfpowerkit:project:diff --revisionfrom 82b6e2f6b58a0c036872eb27197de8fc8214896f --revisionto eef00a353c0fc53fbfb684d16007458039429b96 --output DeltaChanges'
+		   //bat 'sfdx sfpowerkit:project:diff --revisionfrom 82b6e2f6b58a0c036872eb27197de8fc8214896f --revisionto eef00a353c0fc53fbfb684d16007458039429b96 --output config'
 		   bat 'sfdx sfpowerkit:project:diff --revisionfrom %PreviousCommitId% --revisionto %LatestCommitId% --output config'
 	    }
 		

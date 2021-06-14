@@ -1,10 +1,10 @@
 $user = 'test'
-$pass = '11e30f52613642a96d350c04a6558f834e'
+$token = '11e30f52613642a96d350c04a6558f834e'
 $prevcommit = '82b6e2f6b58a0c036872eb27197de8fc8214896f'
 $latestcommit = 'eef00a353c0fc53fbfb684d16007458039429b96'
 
-# The header is the username and password concatenated together
-$pair = "$($user):$($pass)"
+# The header is the username and token concatenated together
+$pair = "$($user):$($token)"
 # The combined credentials are converted to Base 64
 $encodedCreds = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($pair))
 # The base 64 credentials are then prefixed with "Basic"
@@ -26,3 +26,4 @@ $BuildHeaders = @{
     Authorization = $basicAuthValue
 }
 Invoke-WebRequest -Uri "http://localhost:8080/job/abcd/buildWithParameters?PreviousCommitId=$prevcommit&LatestCommitId=$latestcommit" -Headers $BuildHeaders -Method Post
+    
