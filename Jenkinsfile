@@ -63,7 +63,7 @@ node {
 
 		stage('Deploy and Run Tests') {
 		    rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --wait 10 --targetusername SFDX"
-		
+		}
 	}		    
 	  
 	}
