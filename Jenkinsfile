@@ -62,7 +62,7 @@ node {
 	   			// -------------------------------------------------------------------------
 
 		stage('Deploy and Run Tests') {
-		    rc = command "${toolbelt}/sfdx force:source:deploy -p force-app --wait 10 --targetusername SFDX"
+		    rc = command "${toolbelt}/sfdx force:source:deploy -p force-app/main/default/classes --wait 10 --targetusername SFDX"
 		}
 	}		    
 	  
