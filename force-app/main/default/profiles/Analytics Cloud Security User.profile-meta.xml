@@ -101,6 +101,10 @@
         <visible>false</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>BatchLeadConvert</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>MyClass</apexClass>
         <enabled>false</enabled>
     </classAccesses>

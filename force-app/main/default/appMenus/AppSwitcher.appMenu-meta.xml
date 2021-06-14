@@ -88,4 +88,8 @@
         <name>SampleApp</name>
         <type>ConnectedApp</type>
     </appMenuItems>
+    <appMenuItems>
+        <name>DEVHUB_t4tayvf1muncggy6jsly</name>
+        <type>ConnectedApp</type>
+    </appMenuItems>
 </AppMenu>
