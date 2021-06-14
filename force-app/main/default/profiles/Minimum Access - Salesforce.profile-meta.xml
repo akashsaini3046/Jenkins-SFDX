@@ -3,7 +3,7 @@
     <applicationVisibilities>
         <application>standard__AllTabSet</application>
         <default>true</default>
-        <visible>false</visible>
+        <visible>true</visible>
     </applicationVisibilities>
     <applicationVisibilities>
         <application>standard__AppLauncher</application>
@@ -110,6 +110,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>MyTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>MyTest1</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <custom>false</custom>
