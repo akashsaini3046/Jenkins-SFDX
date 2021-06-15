@@ -1,7 +1,7 @@
 $user = 'test'
 $token = '11e30f52613642a96d350c04a6558f834e'
-$prevcommit = '712def2e6106e9369b978edc5e5deba3767d0e9d'
-$latestcommit = '9c085ac3a4ea1bdc36ec985d2aac09cb0db7c33b'
+$prevcommit = '580296afa12515781972b650529426f3964c43dc'
+$latestcommit = '786a2e696e3dd9a1c4396be301cbc0e83a58ebc9'
 
 # The header is the username and token concatenated together
 $pair = "$($user):$($token)"
