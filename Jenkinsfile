@@ -78,10 +78,8 @@ node {
 				}
 				else if (TESTLEVEL=='RunSpecifiedTests')
 				{
-					parameters {
-								string(name: 'SpecifyTestClass', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-								println TESTLEVEL
-								rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} -r %SpecifyTestClass% --verbose --loglevel fatal"
+					println TESTLEVEL
+					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} -r %SpecifyTestClass% --verbose --loglevel fatal"
 				}
    
 				else (rc != 0) 
