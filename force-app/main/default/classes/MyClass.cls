@@ -1,7 +1,7 @@
 //commenting
 //2nd comment
 //3rd comment
-//Another comment
+//Another comment.
 
 public with sharing class MyClass {
 	public MyClass() {
