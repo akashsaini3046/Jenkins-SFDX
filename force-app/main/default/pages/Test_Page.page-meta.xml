@@ -3,6 +3,6 @@
     <apiVersion>51.0</apiVersion>
     <availableInTouch>true</availableInTouch>
     <confirmationTokenRequired>false</confirmationTokenRequired>
-    <description>Test Page 1111111111111111</description>
+    <description>Test Page</description>
     <label>Test_Page</label>
 </ApexPage>
