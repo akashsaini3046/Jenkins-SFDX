@@ -90,8 +90,35 @@ node {
    		}
 		
 
-
-
+            	// -------------------------------------------------------------------------
+				// Deploy metadata and execute unit tests.
+				// -------------------------------------------------------------------------
+			    
+		stage('Deploy and Run Tests') 
+		{
+			script
+			{
+				if (TESTLEVEL=='NoTestRun') 
+				{
+					println TESTLEVEL
+					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --wait 10 --targetusername SFDX "
+				}
+				else if (TESTLEVEL=='RunLocalTests') 
+				{
+					println TESTLEVEL
+					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} --verbose --loglevel fatal"
+				}
+				else if (TESTLEVEL=='RunSpecifiedTests') 
+				{
+					println TESTLEVEL
+					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} -r %SpecifyTestClass% --verbose --loglevel fatal"
+				}
+   				else (rc != 0) 
+				{
+					error 'Salesforce deploy failed.'
+				}
+		   	}
+	    }
 
 
 		}		    
