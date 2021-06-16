@@ -101,10 +101,11 @@ node {
 				// -------------------------------------------------------------------------
 		
 
-		else if (Deployment_Type=='Validate and Deploy')
-		{	
-			stage('Deploy and Run Tests') 
-			{
+		stage('Deploy and Run Tests') 
+		{
+			if (Deployment_Type=='Validate and Deploy')
+			{	
+
 				script
 				{
 					if (TESTLEVEL=='NoTestRun') 
