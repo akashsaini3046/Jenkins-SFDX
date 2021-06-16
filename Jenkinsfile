@@ -62,11 +62,12 @@ node {
 	    		// Example shows how to run a check-only deploy.
 	   			// -------------------------------------------------------------------------
 		
-		if (Deployment_Type=='Validate only')
+		stage('Check Only Deploy') 
 		{
-	
-			stage('Check Only Deploy') 
+			if (Deployment_Type=='Validate only')
 			{
+	
+
 				script
 				{
 				
