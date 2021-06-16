@@ -7,7 +7,7 @@ node {
     def SERVER_KEY_CREDENTIALS_ID=env.SERVER_KEY_CREDENTIALS_ID
     def TEST_LEVEL='%TestLevel%'
     def SF_INSTANCE_URL = env.SF_INSTANCE_URL ?: "https://login.salesforce.com"
-	def Deployment_Type = '%Deployment_Type%'
+	def Deployment_Type
 
 
     def toolbelt = tool 'toolbelt'
