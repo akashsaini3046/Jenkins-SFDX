@@ -100,7 +100,7 @@ node {
 				// -------------------------------------------------------------------------
 		
 
-		if (Deployment_Type=='Validate only')
+		if (Deployment_Type=='Validate and Deploy')
 		{	
 			stage('Deploy and Run Tests') 
 			{
