@@ -7,6 +7,7 @@ node {
     def SERVER_KEY_CREDENTIALS_ID=env.SERVER_KEY_CREDENTIALS_ID
     def TEST_LEVEL='%TestLevel%'
     def SF_INSTANCE_URL = env.SF_INSTANCE_URL ?: "https://login.salesforce.com"
+	def Deployment_Type = '%Deployment_Type%'
 
 
     def toolbelt = tool 'toolbelt'
@@ -60,68 +61,76 @@ node {
      		// -------------------------------------------------------------------------
 	    		// Example shows how to run a check-only deploy.
 	   			// -------------------------------------------------------------------------
-
-		stage('Check Only Deploy') 
+		
+		if (Deployment_Type=='Validate only')
 		{
-			script
+	
+			stage('Check Only Deploy') 
 			{
+				script
+				{
 				
-				if (TESTLEVEL=='NoTestRun') 
-				{
-					println TESTLEVEL
-					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX "
-				}
-				else if (TESTLEVEL=='RunLocalTests') 
-				{
-					println TESTLEVEL
-					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} --verbose --loglevel fatal"
-				}
-				else if (TESTLEVEL=='RunSpecifiedTests')
-				{
-					println TESTLEVEL
-					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} -r %SpecifyTestClass% --verbose --loglevel fatal"
-				}
+					if (TESTLEVEL=='NoTestRun') 
+					{
+						println TESTLEVEL
+						rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX "
+					}
+					else if (TESTLEVEL=='RunLocalTests') 
+					{
+						println TESTLEVEL
+						rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} --verbose --loglevel fatal"
+					}
+					else if (TESTLEVEL=='RunSpecifiedTests')
+					{
+						println TESTLEVEL
+						rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --checkonly --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} -r %SpecifyTestClass% --verbose --loglevel fatal"
+					}
    
-				else (rc != 0) 
-				{
-					error 'Salesforce deploy failed.'
+					else (rc != 0) 
+					{
+						error 'Salesforce deploy failed.'
+					}
 				}
-    		}
+			}
    		}
 		
 
             	// -------------------------------------------------------------------------
 				// Deploy metadata and execute unit tests.
 				// -------------------------------------------------------------------------
-			    
-		stage('Deploy and Run Tests') 
-		{
-			script
+		
+
+		if (Deployment_Type=='Validate only')
+		{	
+			stage('Deploy and Run Tests') 
 			{
-				if (TESTLEVEL=='NoTestRun') 
+				script
 				{
-					println TESTLEVEL
-					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --wait 10 --targetusername SFDX "
+					if (TESTLEVEL=='NoTestRun') 
+					{
+						println TESTLEVEL
+						rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --wait 10 --targetusername SFDX "
+					}
+					else if (TESTLEVEL=='RunLocalTests') 
+					{
+						println TESTLEVEL
+						rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} --verbose --loglevel fatal"
+					}
+					else if (TESTLEVEL=='RunSpecifiedTests') 
+					{
+						println TESTLEVEL
+						rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} -r %SpecifyTestClass% --verbose --loglevel fatal"
+					}
+					else (rc != 0) 
+					{
+						error 'Salesforce deploy failed.'
+					}
 				}
-				else if (TESTLEVEL=='RunLocalTests') 
-				{
-					println TESTLEVEL
-					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} --verbose --loglevel fatal"
-				}
-				else if (TESTLEVEL=='RunSpecifiedTests') 
-				{
-					println TESTLEVEL
-					rc = command "${toolbelt}/sfdx force:source:deploy -p DeltaChanges/force-app --wait 10 --targetusername SFDX --testlevel ${TESTLEVEL} -r %SpecifyTestClass% --verbose --loglevel fatal"
-				}
-   				else (rc != 0) 
-				{
-					error 'Salesforce deploy failed.'
-				}
-		   	}
-	    }
+			}
+		}
 
 
-		}		    
+	}		    
 	  
 	}
 }
